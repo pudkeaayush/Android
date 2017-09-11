@@ -47,3 +47,18 @@ Reducing Memory Bloats :
 - Reusing objects,
 - Avoiding object instantiations in loops
 - Using appropriate data structures
+- Resize the image before rendering so that loading large files does not cause problem
+- Avoid garbage collection
+
+Energy leaks
+------------------
+- Wakelocks and GPS calls impact the memory consumption
+- Use service delegation as a practice for reducing energy consumption
+- Executing expensive computations on remote servers reduces execution time and resource consumption, which can also 
+lead to reduction in the energy drawn from the battery.
+
+The most frequent practices used by the android developers for fixing performance bottlenecks include
+- Usage of multi-threading to avoid lengthy operations in the main thread
+- GUI optimizations for reducing the complexity of the UI
+- Caching to avoid redundant or blocking/time consuming resource accesses
+- memory management to avoid GC events and OOM errors, and source code optimizations.
