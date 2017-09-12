@@ -62,3 +62,10 @@ The most frequent practices used by the android developers for fixing performanc
 - GUI optimizations for reducing the complexity of the UI
 - Caching to avoid redundant or blocking/time consuming resource accesses
 - memory management to avoid GC events and OOM errors, and source code optimizations.
+
+Optimizing Layout Hierarchies
+---------------------------------
+For LinearLayout : The performance might improve by flattening the layout—make the layout shallow and wide, rather than narrow and deep.
+
+
+
