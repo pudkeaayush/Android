@@ -1,10 +1,10 @@
 Improving GUI lagging or ANR( Application Not Responding): 
 --------------------------------------------------------------
-As far as Android is concerned, improving performance is generally easiest to do by way of reducing memory consumption rather than raw algorithmic performance.
-GC runs are expensive, and avoiding them is key to smooth performance. Also, many inexperienced Android devs simply do too much work on the main thread; 
-most app sluggishness isn’t caused by CPU spikes at all, but rather, the fact that these spikes occur on the main thread instead
-of a background thread. Using Handlers to shift work off the main thread generally results in much better app performance, and having 
-sane a threading model and smart memory allocation generally does much more to increase performance than "tweaking" algorithms for speed.
+As far as Android is concerned, improving performance is generally easiest to do by way of reducing memory consumption rather than 
+raw algorithmic performance. GC runs are expensive, and avoiding them is key to smooth performance. Also, many inexperienced 
+Android devs simply do too much work on the main thread; most app sluggishness isn’t caused by CPU spikes at all, but rather, 
+the fact that these spikes occur on the main thread instead of a background thread. Using Handlers to shift work off the main 
+thread generally results in much better app performance, and having sane a threading model and smart memory allocation generally does much more to increase performance than "tweaking" algorithms for speed.
 
 The main purpose is to separate lengthy or blocking operations from the UI thread by implementing worker threads. Those worker threads 
 are implemented by the participants using background services, asynchronous tasks, or threads carefully managed using a Handler.
@@ -14,8 +14,10 @@ The most used GUI optimizations are :
 - Minimizing the number of views used in the screens
 - Reducing overdraw 
 
-Having flat UIs and reducing/reusing views (i.e., GUI components extending the View class) is a desired practice because of several reasons such as: 
-(i) the Activity.findViewById method has been described by a Google Engineer as an expensive function and the method was detected as an energy greedy API
+Having flat UIs and reducing/reusing views (i.e., GUI components extending the View class) is a desired practice because of 
+several reasons such as: 
+(i) the Activity.findViewById method has been described by a Google Engineer as an expensive function and the method was detected 
+as an energy greedy API
 (ii) overdrawing pixels in the screen is expensive because the GUI components in Android apps are redrawn frequently
 
 Good GUI optimization practices:
