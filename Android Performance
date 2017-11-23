@@ -1,0 +1,35 @@
+Properly caching networking data is one of the key to good performance. Reading data from device is always faster than reading from network. 
+HTTP Caching is disabled by default.
+HTTPResponseCache class can be used to turn on the caching of HTTP. Can be used with URLConnection, HTTP or any other library.
+If the cache is full, the oldest one would be removed. Cache control system can be used to control which one to delete first. The server in 
+this case controls what to delete and what not to.
+
+Networking libraries : Volley , okHTTP , Picasso( image library) 
+Network traffic tool in Android studio helps to visualize networking details. Another tool is AT&T's  ARO Tool.
+
+Savvy Cache Management : 
+1. Write your own custom disk cache manager
+2. Use custom Caching logic
+
+Networking drains the battery the most. Hence syncing regularly for updates is not a good option.
+Optimizing Network Request Frequencies:
+- Do not over sync. Can drain battery and consume a lot of data(not ideal for monthly data plan people)
+
+Types of Networking Requests
+----------------------------
+1. Do Now
+2. Server request - can delay
+3. Data push - can delay
+
+Google Cloud messaging can be used to help the server signal the app when the content has changed.
+Back off pattern can be adopted. For instance if queried and nothing to update, next time query ater 2x time, next time 4x and so on.
+
+Can set seek frequency based on user activity. If user is driving, or running or in sleep mode, no need for update. However, if sudden
+movement need to update.
+Adjust sync frequencies based on state of devices. Can wait for Wifi connection.
+Common networking techniques
+- Wait for charging
+- Wait for wifi
+- Batching
+- Backoff 
+- Wait for active radio
