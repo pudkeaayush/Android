@@ -55,3 +55,20 @@ We can check how our app reacts to latency by:
   User smaller serialized formats. Don't use JSON or XML. Eg: commas, spaces, quotes, carriage return. Use buffers( protobuffs, nanobuffs , flatbuffs).
   
   For different speeds, use different resolutions.
+  
+  Services : Run in background on UI thread. Services are not free though. Creating, scheduling and destroying of services takes time and memory.
+  If possible use Handlers or Asyntask or IntentServivce as they do not work on UI thread.
+  
+  2 types of Services
+  1. Started Services ( runs till stopped): startService() , onStartCommand() , stopSelf(), onDestroy()
+  2. Bound services ( runs till all unbind): bindService() , IBinder() , unbindService() , onDestroy()
+  Can mix both but the order should be correct, bind(), unbind() and start(), stop()
+  
+  Systrace tool : Where system time is going
+  
+  Removing unused code ( make smaller apk) : Tool like ProGuard used to shrink, optimize and obfuscate. Written in gradle. Might
+  give false positives for reflection code.
+  Remove unused resources( say of third party libraries that are not required in our application) by setting shrinkResources to true in the 
+  gradle file.
+  
+  
