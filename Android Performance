@@ -33,3 +33,25 @@ Common networking techniques
 - Batching
 - Backoff 
 - Wait for active radio
+
+Effective prefetching is one good technique. However, need to prefetch according to connection. In 2G vs 3G the prefetching should be 
+different( for instance : 4 MB vs 12 MB perhaps).
+GCMNetworkManager API does effective  batching / prefetching.
+
+Adapting to latency - moving from Good connectivity to bad connectivity
+1. Gather information - Keep a lookup table of the type of connection and what to fetch ( use ConnectivityManager )
+2. Make adjustments
+
+We can check how our app reacts to latency by:
+1. Emulator throttling
+2. Network attenuator
+  
+  Minimize Asset Layouts
+  ------------------------
+  Images and serialized data are the two most bloated types of assets.
+  Eg: If transparency is not required, do not use PNG. If not full screen, reduce quality as image as cannot be differentiated.
+  Eg. For tablets, apple watches vs phones, use differnt images in server.
+  
+  User smaller serialized formats. Don't use JSON or XML. Eg: commas, spaces, quotes, carriage return. Use buffers( protobuffs, nanobuffs , flatbuffs).
+  
+  For different speeds, use different resolutions.
