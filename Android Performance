@@ -192,7 +192,17 @@ We can check how our app reacts to latency by:
   3. Don't make allocations in onDraw()( space for allocation + later on GC)
   
   Batching work on until later can be useful sometimes.
+  3 ways:
+  1. AlarmManager
+  2. SyncAdapter
+  3. JobScheduler
   
+  PNG images do not use lossy compression and hence take more space than jpeg. Use some existing tools to reduce the size of bloated png
+  files. Better use jpeg( Uses lossy compression. Does not have alpha channel).
+  
+  PreScaling bitmaps( i.e loading lower resolution image by scaling before loading in memory) is useful if we do not need to display
+  full size images. BitMaps use the largest contiguous block of heap memory. Object pool concept can be applied to bitmaps here. Rather
+  than freeing a memory block back to the heap, keep it.
   
   
   
