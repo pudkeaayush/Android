@@ -162,3 +162,37 @@ We can check how our app reacts to latency by:
   User Networking Traffic tool to monitor network.
   JobSchedulerAPI is used to schedule jobs and thus save battery drainage.
   
+  MemoryChurns :  Many objects are created and destroyed pretty soon. Better use objectpools. ObjectPool keep references of objects
+  and thus when next one is needed use the same instead of allocating new one from heap.
+  ObjectPools are good but the responsibility of freeing is up to the user like in C. Need to clear references of members properly to
+  avoid memory leak.
+  
+  Indexing is faster than using an iterator.
+  LruCache class can be used to use and LRU Cache.
+  Use Lint tool( Analyze, Inspect code) for performance tips inside Android studio.
+  
+  onDraw() allocations are expensive as onDraw() runs on UI thread and needs to be garbage collecte. GC on main thread is bad.
+  Number of times onDraw() is called is high so hence not advisable. Avoid.
+  
+  UI thread is the only thread that can draw and respond to the input.
+  
+  ANR : When an app takes more than 5 seconds to return from the event handler( as UI thread is blocked, waiting for something)
+  When developer options -> Strict mode is enabled, anytime the blocking call is made on the UI thread, it shows red flash. It is like
+  RunTime version of LINT.
+  
+  Android has over 70 standard views like ListView, Spinner, RadioButton, Switch, TimePicker, WebView, NumberPicker, Checkbox and so on.
+  All drawing starts with View.invalidate(). However, never call invalidate if you don't have to for Custom Views. Another rule for
+  custom views is to always pass a rectangle to invalidate.
+  For example in drawing a custom view of cards for Solitaire game, no need to overdraw or draw all cards completely. Just draw the 
+  visible portion of the card. Use clipRect() instead for drawing.
+  
+  1. Don't draw what you don't have to. ClipRect() prevents GPU(hardware) from drawing, not CPU.
+  2. Don't draw methods that are not hardware accelerated(eg: work on GPU). If it is not hardware accelerated, draws using CPU and then
+  sends it to GPU.
+  3. Don't make allocations in onDraw()( space for allocation + later on GC)
+  
+  Batching work on until later can be useful sometimes.
+  
+  
+  
+  
