@@ -80,7 +80,7 @@ We can check how our app reacts to latency by:
   
   Batching : Grouping together of identical tasks. If small functions are called repeatedly, they add up to big problem.
   So add up once instead of doing again and again per each instance.Eg: If image is loaded 20 times, then load just once.
-  Especially useful for Networking cases. Can be used to draw custom views together
+  Especially useful for Networking cases. Can be used to draw custom views together. Use pending queue to store tasks.
   
   Serialization : Take in memory object and convert into formatted chunk of data( like JSON) that can be converted back to in memory object later on.
   Serialization is everywhere :
@@ -125,4 +125,40 @@ We can check how our app reacts to latency by:
   
   Enums generally take more memory than ints. So avoid Enums. ProGuard generally converts Enums to int to reduce overhead.
   
+  onLowMemory() callback is called when the in memory resources need to be released by the program which is a callback from the OS.
+  However, this is called only when all other apps have been killed.
+  Better, onTrimMemory() callback is now provided. Can be overridden in Activity, Application, Fragment , Service, Content Provider.
+  AcvityManage.isLowRamMemory() is another API.
+  
+  Do not leak views. Garbage collector in Android can only remove those objects that are no longer referenced anywhere.
+  A leak is an object that is no longer needed but some reference is there somewhere.
+  Views contain a reference to the activity that created it. Activities in turn reference many other objects.
+  For example, if a device is rotated, onConfigurationChanged() is called and an activity is recreated. If a view was leaked in the previous
+  activity, that activity can no longer be freed. Now when user rotates device again, total of 3 activities are in memory.
+  1. Don't reference views inside of async callback.
+  2. Don't reference views from static objects.
+  3. Don't use collections like Weakhashmap to store views.
+  
+  Location and Battery:
+  -----------------------
+  Use LocationRequest class. Has methods setInterval and setFastestInterval.
+  setInterval : Interval at which to get GPS requests. Lower number means more update and more battery drainage.
+  Can use Backoff techniques.
+  Other apps also affect the locationrequest. Sent at the least setInterval. Can use setFastestInterval() to avoid updating our app
+  To get location we can use:
+  1. GPS provider : More accurate , more power
+  2. Cell network provider : Less accurate, less power
+  PassiveProvider which sends GPS locations received from other applications
+  FusedLocationProvider api lets android handle it for us. Battery historian tool can be used.
+  
+  RelativeLayout : Helps to find the position of a view with respect to another view. Eg: Right of a textbox
+  Thus if there is a change in say any button(eg: button size is doubled), the other views as well as the parent view might need to be
+  recalculated and thus many such operations might be expensive.
+  Hence reduce the depth to avoid cascading such operations. ( double taxation )
+  GridLayout : Avoids double taxation. GridView is a ViewGroup that displays items in a two-dimensional, scrollable grid. 
+  The grid items are automatically inserted to the layout using a ListAdapter.
+  Use systrace and minimize depth.
+   
+  User Networking Traffic tool to monitor network.
+  JobSchedulerAPI is used to schedule jobs and thus save battery drainage.
   
