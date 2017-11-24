@@ -71,4 +71,58 @@ We can check how our app reacts to latency by:
   Remove unused resources( say of third party libraries that are not required in our application) by setting shrinkResources to true in the 
   gradle file.
   
+  Culling: Removing things that are not important. Eg: Overdrawing is not good. If database query is to be done, better to prune the
+  dataset first based on some filter and then do the searching rather than searching on the whole thing.
+  
+  Threads in Android help in parallel processing. AsyncTask and Thread both help to stop the program from hanging.
+  If thread should affect the UI : AsyncTask ( Eg: ProgressDialog)
+  If thread should be hidden : Thread
+  
+  Batching : Grouping together of identical tasks. If small functions are called repeatedly, they add up to big problem.
+  So add up once instead of doing again and again per each instance.Eg: If image is loaded 20 times, then load just once.
+  Especially useful for Networking cases. Can be used to draw custom views together
+  
+  Serialization : Take in memory object and convert into formatted chunk of data( like JSON) that can be converted back to in memory object later on.
+  Serialization is everywhere :
+  - Sending data between device and server
+  - Sending data between 2 processes
+  - Storing user preferences to disk
+  - Passing the song information to UI to be displayed.
+  
+  Ways to serialize?
+  - Implements Serializable : Bad performance
+  - ObjecOutputStream : Bad performance
+  
+  Better approach is to use GSON library although GSON uses JSON format which produces bloated files.
+  Android resources files are compiled at build time so don't have trouble of bloating.
+  
+  Better options? Use binary serialization forms
+  - Google protocol buffers
+  - Nano proto buffers
+  - FlatBUffers library.
+  
+  Better not to serialize at times.
+  Eg: User preferences can be stored as SharedPreferences( Key , Value) store.
+  Parcelable API for sharing between processes
+  For structured data, can use SQLite
+  
+  Ordering of data inside serialization can be very important. 
+  Instead of using Array of structures use Structure of Arrays.
+  For instance if class has height and width, instead of Array of Class use structure of arrays where array1 = array of height and array2
+  is array of width. Due to this compression techniques work better. Eg: Gzip which searches for duplicate strings in a window of 32k
+  
+  Caching UI data is very important as we might need to load it when the data is being fetched and we do not want to show empty screen
+  with spinner.
+  
+  ArrayMap is better than HashMap if number of objects are lesser or using Map of Map.
+  It contains two maps instead of one big one. First contains the hash value and the second the key, value pair corresponding to it.
+  Can use binary search. 
+  Resizing and Shifting during insertion and deletion might cause problem with ArrayMap. Hence only useful for smaller number of objects.
+  
+  Autoboxing will take more memory. So use primitives if possible especially when using loops.
+  Integer objects take 16 bytes compared to int(4 bytes)
+  SparseArray means can use primitives in HashMap
+  
+  Enums generally take more memory than ints. So avoid Enums. ProGuard generally converts Enums to int to reduce overhead.
+  
   
