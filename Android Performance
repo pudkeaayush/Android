@@ -204,5 +204,43 @@ We can check how our app reacts to latency by:
   full size images. BitMaps use the largest contiguous block of heap memory. Object pool concept can be applied to bitmaps here. Rather
   than freeing a memory block back to the heap, keep it.
   
+  Expresso : Used to write android UI tests
+  MonkeyRunner : Used for testing purpose
   
+  Memory profiling can be done via:
+  1. Heap viewer
+  2. Allocation Tracker
+  
+  Android Device tracker components
+  1. Dalvik Debug Monitor Server (DDMS)
+  2. TraceView
+  3. Systrace
+  4. Hierarchy Viewer
+  
+  System tries to redraw our activity every 16ms. If we take longer, we get a dropped frame. Causes lag in the device.
+  More visible when the user tries to scroll( eg: Dragging a listView).
+  Reasons might be:
+  - Too much time wasted on redrawing large parts of view hierarchy.
+  - Overdrawing
+  - Lots of animation
+  
+  Solution?
+  - Use Activity Viewer to check complexity of the application.
+  - Use tools like 
+  
+  Developer Options -> Show GPU Overdraw helps to show the Overdraw for an app. Many overdraws will be more reddish. Less, will be bluish.
+  Refresh Rate : How many times a screen can update its display per second( eg: 60Hz)
+  Frame Rate : How many times can the GPU draw frame per second( eg: 30fps)
+  vsync provides a buffer that helps to maintain consistency between the frame rate and refresh rate.
+  
+  Profile GPU rendering tool from Developer options helps to find the reason for the slowdown of Applications.
+  Taller the bar more time it took to render. Green line represents 16ms. All vertical bars should be smaller than this.  
+  
+  Why 60fps?
+  Human brain starts seeing smooth transitions if 60fps. 10fps is not so smooth.
+  
+  1000ms / 60 frames = 16 ms / frame
+  
+  Anytime a button say is to be drawn, it is converted into polygons and textures in CPU before being passed to the GPU for rasterization.
+  Show GPU View Updates in developer options shows the GPU view that gets invalidated.  
   
